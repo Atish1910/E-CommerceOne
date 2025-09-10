@@ -128,7 +128,15 @@ h6,
   z-index: 99;
 }
 
-.product-img{
-  height: 340px;
+.product-img {
+  height: 300px;
+  width: 100%;
   object-fit: cover;
+}
+
+.card-inner {
+  cursor: pointer;
+}
+.card-inner:hover p {
+  text-decoration: underline;
 }
