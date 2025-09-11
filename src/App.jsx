@@ -1,74 +1,57 @@
-import "./App.css";
+
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.min.js";
-import Header from "./components/header";
-import Footer from "./components/footer";
-import ProductsOne from "./components/collections/ProductsOne";
-import ProductsTwo from "./components/collections/ProductsTwo";
-import { useState } from "react";
-import ProductsModel from "./components/collections/ProductsModel";
-// import p1 from "../assets/img/products/p1.webp";
-import p1 from "./assets/img/products/p1.webp";
-import p2 from "./assets/img/products/p2.webp";
+import "bootstrap/dist/js/bootstrap.bundle.min";
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import './App.css'
+import Home from "./pages/Home"
+import { Route, Routes } from "react-router-dom"
+import Navbar from "./components/Navbar";
+import Cart from "./pages/Cart";
+import MyAccount from "./components/MyAccount";
+import Register from "./login/Register";
+import Login from "./login/Login";
+import { useEffect, useState } from "react";
+
+
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
-  const products = [
-    {
-      id: 1,
-      name: "Black Onyx Necklace (Titanium Steel)",
-      price: "Rs. 1,499.00",
-      img: p1,
-    },
-    {
-      id: 2,
-      name: "Perla - Natural Pearl Necklace",
-      price: "Rs. 2,999.00",
-      img: p2,
-    },
-  ];
+  useEffect(() => {
+    const storedLogin = localStorage.getItem("isLoggedIn");
+    const storedUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
-  const openModel = (p) => {
-    setSelectedProduct(p);
-    setIsOpen(true);
-  };
+    if (storedLogin === "true" && storedUser) {
+      setIsLoggedIn(true);
+      setLoggedInUser(storedUser);
+    }
+  }, []);
+
+
   return (
     <>
+    <section className="bg-light py-3 border">
+    <Navbar isLoggedIn={isLoggedIn} loggedInUser={loggedInUser} />
+    </section>
       <section>
-        <Header></Header>
         <div className="container">
-          <div className="row">
-            <h4 className="mb-3 "> Daily Wear Anti Tarnish Necklace</h4>
-            {products.map((p) => (
-              <div className="col-lg-3" key={p.id}>
-                <div className="card border-0 ">
-                  <div className="card-inner" onClick={openModel}>
-                    <img src={p.img} alt="" className="product-img" />
-                    <div className="py-2">
-                      <p className="mb-0">{p.name}</p>
-                      <h6 className="">{p.price}</h6>
-                    </div>
-                  </div>
-                  <button className="btn btn-outline-secondary rounded-0 ">
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/clothes" element={<Home category="clothes" />} />
+            <Route path="/nuevo" element={<Home category="nuevo" />} />
+            <Route path="/furniture" element={<Home category="furniture" />} />
+            <Route path="/shoes" element={<Home category="shoes" />} />
+            <Route path="/miscellaneous" element={<Home category="miscellaneous" />} />
+            <Route path="/cart" element={<Cart></Cart>} />
+            <Route path="/my-account" element={<MyAccount></MyAccount>} />
+            <Route path="/register" element={<Register></Register>} />
+            <Route path="/login" setIsLoggedIn={setIsLoggedIn} setLoggedInUser={setLoggedInUser} element={<Login></Login>} />
+          </Routes>
         </div>
-        {/* <ProductsOne openModel={openModel}></ProductsOne> */}
-        <ProductsTwo></ProductsTwo>
-        <Footer></Footer>
-        <ProductsModel
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          p={selectedProduct}
-        ></ProductsModel>
-      </section>
+      </section>      
+
     </>
-  );
+  )
 }
 
-export default App;
+export default App
