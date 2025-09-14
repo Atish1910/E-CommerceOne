@@ -5,21 +5,20 @@ import { toast } from "react-hot-toast";
 
 const Product = ({post , onSelect }) => {
 
-    // const [selected, setSelected] = useState(false);
-  // as we created a redux store we are managing state from that store
+  
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  // we call that funcation from cartSlice.js to add the product inside cart
+  
   const addToCart = () => {
     dispatch(add(post)); 
-    toast.success("Item added to Cart"); // popup will open
+    toast.success("Item added to Cart");
   };
 
-  // we call that funcation from cartSlice.js to remove the product inside cart
+  
   const removeFromCart = () => {
-    dispatch(remove(post.id)); // we provide each functaion id so it will, easy to remove product from cart
-    toast.error("Item Removed from Cart"); // popup will open
+    dispatch(remove(post.id)); 
+    toast.error("Item Removed from Cart"); 
   };
 
     return (

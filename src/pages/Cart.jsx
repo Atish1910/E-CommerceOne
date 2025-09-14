@@ -5,11 +5,9 @@ import { Link } from "react-router-dom";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
-  const [totalAmount, setTotalAmount] = useState(0); // Products ammount set & define 
-  const [totalItems, setTotalItems] = useState(0); // Products quantity set & define
-
-  // we can increase No of selected product 
-  // if i select cloth & i want to imcrease Quantity we can do it by below code
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [totalItems, setTotalItems] = useState(0); 
+  
   useEffect(() => {
     setTotalAmount(
       cart.reduce((prevItem, currItem) => prevItem + currItem.price * currItem.quantity, 0)

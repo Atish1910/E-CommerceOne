@@ -15,15 +15,13 @@ const Home = ({ category }) => {
 
   // get api call with axios
   async function fetchProductsData() {
-    // debugger
-    // while doing api call fetching data from api till that we show spinner that sppinnr depend on below true & false
     setLoading(true);
 
     try {
-      const res = await axios.get(API_URL); // bind api call in res veriable
+      const res = await axios.get(API_URL);
       setPosts(res.data);
       // console.log("Fetching api" + posts);
-      console.log(res.data); // foe debugging
+      console.log(res.data);
     } catch (error) {
       console.log("Unable To Fetch Products ", error);
       setPosts([]);
@@ -31,18 +29,15 @@ const Home = ({ category }) => {
     setLoading(false);
   }
 
-  // if page get refresh function will get auto call
   useEffect(() => {
     fetchProductsData();
   }, []);
 
-  // we are filtering data by category (shoe, cloaths, furniture)
   const filteredPosts = posts
     .filter((post) => {
       return category ? post.category.slug === category : true;
     })
 
-    // we added a funality for serching product on basis of title
     .filter((post) =>
       post.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
