@@ -15,7 +15,7 @@ const Navbar = ({ isLoggedIn, loggedInUser }) => {
   return (
     <div className="container sticky-top">
       <div className="row align-items-center" >
-        <div className="col-lg-7">
+        <div className="col-lg-9">
         <nav className="navbar navbar-expand-lg  navbar-light">
           <div className="">
             <NavLink to="/cart">
@@ -44,25 +44,23 @@ const Navbar = ({ isLoggedIn, loggedInUser }) => {
                 {/* // here are all navlinks user can navgate on clicking on them */}
                   <NavLink to="/" className="nav-tab fs-4 fw-bold pe-lg-4 d-none" >Shopi</NavLink>
                       <NavLink to="/" className={({ isActive }) =>isActive ? "nav-item nav-link-active" : "nav-item nav-link"}>Home</NavLink>
-                      <NavLink to="/nuevo" className={({ isActive }) =>isActive ? "nav-item nav-link-active" : "nav-item nav-link"}>Electronics</NavLink>
-                      <NavLink to="/furniture" className={({ isActive }) =>isActive ? "nav-item nav-link-active" : "nav-item nav-link"}>Furniture</NavLink>
-                      <NavLink to="/shoes" className={({ isActive }) =>isActive ? "nav-item nav-link-active" : "nav-item nav-link"}>Shoes</NavLink>
-                      <NavLink to="/miscellaneous" className={({ isActive }) =>isActive ? "nav-item nav-link-active" : "nav-item nav-link"}>Miscellaneous</NavLink>
+                      <NavLink to="/nuevo" className={({ isActive }) =>isActive ? "nav-item nav-link-active" : "nav-item nav-link"}>Necklaces</NavLink>
+                      <NavLink to="/furniture" className={({ isActive }) =>isActive ? "nav-item nav-link-active" : "nav-item nav-link"}>Earrings</NavLink>
+                      <NavLink to="/shoes" className={({ isActive }) =>isActive ? "nav-item nav-link-active" : "nav-item nav-link"}>Bracelets & Anklets</NavLink>
+                      <NavLink to="/miscellaneous" className={({ isActive }) =>isActive ? "nav-item nav-link-active" : "nav-item nav-link"}>Best Sellers</NavLink>
                       <NavLink to="/my-account" className={({ isActive }) =>isActive ? "nav-item nav-link-active" : "nav-item nav-link"}>My Account</NavLink>
-                      {/* <NavLink to="/register" className={({ isActive }) =>isActive ? "nav-item nav-link-active" : "nav-item nav-link"}>Register</NavLink>
-                      <NavLink to="/login" className={({ isActive }) =>isActive ? "nav-item nav-link-active" : "nav-item nav-link"}>Login</NavLink> */}
-                      {/* if user is loggedin then show his email id in navbar */}
                       {isLoggedIn ? (
                           <p className='mb-0 d-lg-none'><b>{loggedInUser?.email}</b></p>
                         ) : (
                           <NavLink to="/login" className={({ isActive }) =>isActive ? "nav-item nav-link-active" : "nav-item nav-link"}>Login</NavLink>
-                        )}
+                        )
+                      }
                       
               </div>
           </div>
       </nav>
         </div>
-        <div className="col-5 d-lg-flex align-items-center justify-content-around d-none text-end pe-lg-4">
+        <div className="col-3 d-lg-flex align-items-center justify-content-around d-none text-end pe-lg-4">
         {/* cart item for mobile view  */}
         <p className='mb-0'><b>{loggedInUser?.email}</b></p>
             <NavLink to="/cart">

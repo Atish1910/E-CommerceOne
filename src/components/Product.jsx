@@ -23,21 +23,22 @@ const Product = ({post , onSelect }) => {
 
     return (
 <>
-    <div className=" py-3 rounded-3 mb-4 mt-2 z-index-01 border px-2"
-      onClick={() => onSelect(post)}>
-        <div className="position-relative">
-            <img src={post.category.image} className='product' loading='lazy' alt=""  type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"  />
+    <div className=" py-3 mb-4 mt-2 z-index-01  px-2 d-grid" onClick={() => onSelect(post)}>
+        <div className=""  type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"  >
+            <img src={post.category.image} className='product' loading='lazy' alt="" />
             <h6 className='product-type px-3 py-1 '>{post.category.slug}</h6>
+            <div className=" pt-2">
+                <p className="mb-0">{post.title}</p>
+                <p><b>{post.price}$</b></p>
+            </div>
+        </div>
+        <div className="">
             {cart.some((p) => p.id === post.id) ? (
-                <i className="bi bi-dash-square fs-4 product-add" onClick={removeFromCart}></i>
+              <button className="btn btn-outline-secondary rounded-0 w-100" onClick={removeFromCart}>Remove From Cart</button>
             ) : (
-            <i className="bi bi-plus-square fs-4 product-add" onClick={addToCart}></i>
+              <button className="btn btn-outline-success rounded-0 w-100" onClick={addToCart}>Add To Cart</button>
             )}
-        </div>
-        <div className="d-flex align-items-center justify-content-around pt-2">
-            <p>{post.title}</p>
-            <p><b>{post.price}$</b></p>
-        </div>
+          </div>
     </div>
 
 </>

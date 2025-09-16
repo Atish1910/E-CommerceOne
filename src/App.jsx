@@ -27,7 +27,7 @@ function App() {
 
   return (
     <>
-      <section className="bg-light py-3 border">
+      <section className="bg-light py-3 border sticky-top">
         <Navbar isLoggedIn={isLoggedIn} loggedInUser={loggedInUser} />
       </section>
       <section>
