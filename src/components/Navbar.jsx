@@ -1,18 +1,18 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import logo02 from "../assets/logos/1.png"
 
-const Navbar = ({ logo01 }) => {
+const Navbar = ({ logo01 ,onSearch}) => {
   return (
     <>
       <section className="bg-rose">
         <div className="container">
-          <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+          <header className="d-flex flex-wrap align-items-center justify-content-center py-1 border-bottom">
             <NavLink
               to="/"
               className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
             >
-              Veloura World
-              {/* <img src={logo01} alt="" /> */}
+              <img src={logo02} className="logo" alt="" />
             </NavLink>
             <ul className="nav nav-pills">
               <li className="nav-item">
@@ -36,9 +36,10 @@ const Navbar = ({ logo01 }) => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/ghg" className="nav-link">
-                  Best Sellers
-                </NavLink>
+                
+                <form action="">
+                    <input type="text" className='form-control' onChange={onSearch} placeholder="Enter Product name..." />
+                </form>
               </li>
             </ul>
           </header>

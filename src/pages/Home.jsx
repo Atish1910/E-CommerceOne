@@ -2,9 +2,10 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Spinner from '../components/Spinner';
 import Product from '../components/Product';
+import Navbar from '../components/Navbar';
 
   const API_URL = "https://api.escuelajs.co/api/v1/products";
-const Home = ({category}) => {
+const Home = ({category,logo01}) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
@@ -48,16 +49,8 @@ const Home = ({category}) => {
 
 
 return (
-<>
-    <section>
-        <div className="container py-5 border">
-            <div className="row">
-                <form action="">
-                    <input type="text" className='form-control' onChange={onSearch} placeholder="Enter Your Product name...." />
-                </form>
-            </div>
-        </div>
-    </section>
+<>  
+    <Navbar logo01={logo01} onSearch={onSearch}></Navbar>
     <section>
         {
             loading ? (<Spinner></Spinner>) :
