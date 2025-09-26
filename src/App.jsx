@@ -1,46 +1,13 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
-import "bootstrap-icons/font/bootstrap-icons.css";
-import "./App.css";
-import Home from "./pages/Home";
-import { Route, Routes } from "react-router-dom";
+import { Outlet, Route, Router, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Cart from "./pages/Cart";
-import MyAccount from "./components/MyAccount";
-import Register from "./auth/Register";
-import Login from "./auth/Login";
-import { useEffect, useState } from "react";
-import Hero from "./components/Hero";
-import hero1 from "./assets/img/hero/1.jpg";
-import hero2 from "./assets/img/hero/2.jpg";
-import logo from "./assets/img/logo/1.jpg";
+import Home from "./pages/Home";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loggedInUser, setLoggedInUser] = useState(null);
-
-  useEffect(() => {
-    const storedLogin = localStorage.getItem("isLoggedIn");
-    const storedUser = JSON.parse(localStorage.getItem("loggedInUser"));
-
-    if (storedLogin === "true" && storedUser) {
-      setIsLoggedIn(true);
-      setLoggedInUser(storedUser);
-    }
-  }, []);
-
   return (
     <>
       <section className="bg-light py-3 border sticky-top">
-        <Navbar
-          isLoggedIn={isLoggedIn}
-          logo={logo}
-          loggedInUser={loggedInUser}
-        />
+        <Navbar isLoggedIn={isLoggedIn} loggedInUser={loggedInUser} />
       </section>
-      {/* <div className="d-flex h-100 justify-content-center">
-        <Hero hero1={hero1}></Hero>
-      </div> */}
       <section>
         <div className="container">
           <Routes>

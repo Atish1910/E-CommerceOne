@@ -1,139 +1,47 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 
-const Navbar = ({ isLoggedIn, loggedInUser, logo }) => {
-  const cart = useSelector((state) => state.cart);
-
+const Navbar = () => {
   return (
-    <div className="container sticky-top">
-      <div className="row align-items-center">
-        <div className="col-2 d-lg-flex align-items-center justify-content-around ">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              isActive ? "nav-item nav-link-active" : "nav-item nav-link"
-            }
-          >
-            <img src={logo} alt="" />
-          </NavLink>
-        </div>
-        <div className="col-lg-8">
-          <nav className="navbar navbar-expand-lg  navbar-light">
-            <div className="">
-              <NavLink to="/cart">
-                <div className="position-relative ps-3  d-lg-none">
-                  <i className="bi bi-cart fs-4 fw-bold text-dark"></i>
-                  {cart.length > 0 && (
-                    <span
-                      className="count-01"
-                      style={{ animation: "bounce 1s infinite" }}
-                    >
-                      {/* if user click any product it will increase count */}
-                      {cart.length}
-                    </span>
-                  )}
-                </div>
-              </NavLink>
-            </div>
-            <NavLink to="/" className="nav-tab fs-4 fw-bold pe-lg-4 d-lg-none">
-              Shopi
-            </NavLink>
-            <button
-              type="button"
-              className="navbar-toggler me-0"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarCollapse"
+    <>
+      <section>
+        <div className="container">
+          <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a
+              href="/"
+              className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none"
             >
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            {/* navbar for desktop view */}
-            <div
-              className="collapse navbar-collapse justify-content-center align-items-center"
-              id="navbarCollapse"
-            >
-              <div className="navbar-nav">
-                {/* // here are all navlinks user can navgate on clicking on them */}
-                <NavLink to="/" className="nav-tab fs-4 fw-bold pe-lg-4 d-none">
-                  Shopi
+              <svg className="bi me-2" width="40" height="32">
+                <use xNavLink:href="#bootstrap"></use>
+              </svg>
+              <span className="fs-4">Simple header</span>
+            </a>
+            <ul className="nav nav-pills">
+              <li className="nav-item">
+                <NavLink to="/" className="nav-link">
+                  Home
                 </NavLink>
-                <NavLink
-                  to="/nuevo"
-                  className={({ isActive }) =>
-                    isActive ? "nav-item nav-link-active" : "nav-item nav-link"
-                  }
-                >
-                  Necklaces
+              </li>
+              <li className="nav-item">
+                <NavLink to="/clothes" className="nav-link">
+                  Clothes
                 </NavLink>
-                <NavLink
-                  to="/furniture"
-                  className={({ isActive }) =>
-                    isActive ? "nav-item nav-link-active" : "nav-item nav-link"
-                  }
-                >
-                  Earrings
+              </li>
+              <li className="nav-item">
+                <NavLink to="/shoes" className="nav-link">
+                  Shoes
                 </NavLink>
-                <NavLink
-                  to="/shoes"
-                  className={({ isActive }) =>
-                    isActive ? "nav-item nav-link-active" : "nav-item nav-link"
-                  }
-                >
-                  Bracelets & Anklets
+              </li>
+              <li className="nav-item">
+                <NavLink to="/furniture" className="nav-link">
+                  Furniture
                 </NavLink>
-                <NavLink
-                  to="/miscellaneous"
-                  className={({ isActive }) =>
-                    isActive ? "nav-item nav-link-active" : "nav-item nav-link"
-                  }
-                >
-                  Best Sellers
-                </NavLink>
-              </div>
-            </div>
-          </nav>
+              </li>
+            </ul>
+          </header>
         </div>
-        <div className="col-2 d-lg-flex align-items-center justify-content-around d-none text-end pe-lg-4">
-          {isLoggedIn ? (
-            <p className="mb-0 d-lg-none">
-              <b>{loggedInUser?.email}</b>
-            </p>
-          ) : (
-            <NavLink
-              to="/login"
-              className={({ isActive }) =>
-                isActive ? "nav-item nav-link-active" : "nav-item nav-link"
-              }
-            >
-              Login
-            </NavLink>
-          )}
-          <NavLink
-            to="/my-account"
-            className={({ isActive }) =>
-              isActive ? "nav-item nav-link-active" : "nav-item nav-link"
-            }
-          >
-            <i class="bi bi-person"></i>
-          </NavLink>
-          <NavLink to="/cart">
-            <div className=" ps-3">
-              <i className="bi bi-cart fs-4 fw-bold text-dark position-relative">
-                {cart.length > 0 && (
-                  <span
-                    className="count-01"
-                    style={{ animation: "bounce 1s infinite" }}
-                  >
-                    {cart.length}
-                  </span>
-                )}
-              </i>
-            </div>
-          </NavLink>
-        </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 };
 
