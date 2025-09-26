@@ -1,0 +1,148 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+/* ===========================
+   Root Variables
+=========================== */
+:root {
+  --rose: #b03060;
+  --blue: #3a7ca5;
+  --gold: #ffb84d;
+  --light: #f8f8f8;
+  --dark: #2b2b2b;
+}
+body {
+  font-size: 14px;
+  font-family: var(--cfont);
+  color: var(--dark);
+  background-color: #fff;
+  font-display: swap;
+}
+
+/* ===========================
+   Text Color Utilities
+=========================== */
+.text-rose {
+  color: var(--rose) !important;
+}
+
+.text-blue {
+  color: var(--blue) !important;
+}
+
+.text-gold {
+  color: var(--gold) !important;
+}
+
+.text-light {
+  color: var(--light) !important;
+}
+
+.text-dark {
+  color: var(--dark) !important;
+}
+
+/* ===========================
+   Background Color Utilities
+=========================== */
+.bg-rose {
+  background-color: var(--rose) !important;
+}
+
+.bg-blue {
+  background-color: var(--blue) !important;
+}
+
+.bg-gold {
+  background-color: var(--gold) !important;
+}
+
+.bg-light {
+  background-color: var(--light) !important;
+}
+
+.bg-dark {
+  background-color: var(--dark) !important;
+}
+
+/* ===========================
+   Rose Button
+=========================== */
+.btn-rose {
+  background-color: var(--rose);
+  color: #fff;
+}
+.btn-rose:hover {
+  background-color: #92294b; /* darker rose */
+  color: #fff;
+}
+
+/* ===========================
+   Blue Button
+=========================== */
+.btn-blue {
+  background-color: var(--blue);
+  color: #fff;
+}
+.btn-blue:hover {
+  background-color: #2a5e7a;
+  color: #fff;
+}
+
+/* ===========================
+   Gold Button
+=========================== */
+.btn-gold {
+  background-color: var(--gold);
+  color: var(--dark);
+}
+.btn-gold:hover {
+  background-color: #e69d25; /* darker gold */
+  color: var(--dark);
+}
+
+/* ===========================
+   Light Button
+=========================== */
+.btn-light-custom {
+  background-color: var(--light);
+  color: var(--dark);
+  border: 1px solid var(--dark);
+}
+.btn-light-custom:hover {
+  background-color: #e6e6e6;
+  color: var(--dark);
+}
+
+/* ===========================
+   Navbar Pills
+=========================== */
+
+/* Normal Nav Links */
+.nav-pills .nav-link {
+  color: var(--light) !important;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+/* Hover State */
+.nav-pills .nav-link:hover {
+  color: var(--rose);
+  background-color: var(--light);
+}
+
+/* Active State */
+.nav-pills .nav-link.active {
+  color: var(--gold) !important;
+  background-color: var(--rose) !important;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+@media (min-width: 992px) {
+  .product {
+    height: 250px;
+  }
+  .cart-text {
+    font-size: 26px;
+  }
+}

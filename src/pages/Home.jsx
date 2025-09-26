@@ -21,8 +21,6 @@ const Home = ({category}) => {
         }
         setLoading(false)
     }
-    setLoading(false);
-  }
 
     useEffect(() => {
         fetchProducts();
