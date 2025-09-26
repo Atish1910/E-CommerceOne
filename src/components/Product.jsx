@@ -3,7 +3,7 @@ import React from 'react';
 const Product = ({product}) => {
     return (
         <>
-         <div class="col-3 mb-4 d-grid">
+         <div class="col-lg-3 col-6 mb-4 d-grid">
             <div class="card shadow-sm rounded-0"> 
                 <img src={product.category.image} alt="" />
                 <div class="card-body">
@@ -12,7 +12,7 @@ const Product = ({product}) => {
                         <div class="btn-group"> 
                             <button type="button" class="btn btn-sm btn-blue">Add To Cart</button> 
                         </div>
-                        <div className="text-dark"><small>Rs, {product.price}.00</small></div>
+                        <div className="text-dark price"><small>Rs, {product.price}.00</small></div>
                     </div>
                 </div>
             </div>
