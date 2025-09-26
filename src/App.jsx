@@ -10,6 +10,10 @@ import MyAccount from "./components/MyAccount";
 import Register from "./auth/Register";
 import Login from "./auth/Login";
 import { useEffect, useState } from "react";
+import Hero from "./components/Hero";
+import hero1 from "./assets/img/hero/1.jpg";
+import hero2 from "./assets/img/hero/2.jpg";
+import logo from "./assets/img/logo/1.jpg";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,8 +32,15 @@ function App() {
   return (
     <>
       <section className="bg-light py-3 border sticky-top">
-        <Navbar isLoggedIn={isLoggedIn} loggedInUser={loggedInUser} />
+        <Navbar
+          isLoggedIn={isLoggedIn}
+          logo={logo}
+          loggedInUser={loggedInUser}
+        />
       </section>
+      {/* <div className="d-flex h-100 justify-content-center">
+        <Hero hero1={hero1}></Hero>
+      </div> */}
       <section>
         <div className="container">
           <Routes>
