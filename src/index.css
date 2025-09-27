@@ -68,12 +68,12 @@ body {
    Rose Button
 =========================== */
 .btn-rose {
-  background-color: var(--rose);
-  color: #fff;
+  background-color: var(--rose) !important;
+  color: #fff !important;
 }
 .btn-rose:hover {
-  background-color: #92294b; /* darker rose */
-  color: #fff;
+  background-color: var(--rose) !important; /* darker rose */
+  color: var(--light) !important;
 }
 
 /* ===========================
@@ -145,9 +145,220 @@ body {
   font-size: 12px !important;
 }
 
-form-control:focus {
+.form-control:focus {
     box-shadow:unset !important;
 }
+
+.breadcrumb-section {
+  background-image: var(--bg-image);
+  background-blend-mode: multiply;
+  background-color: #00000075;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 200px !important; 
+  display: flex;
+}
+
+.breadcrumb-section h4 {
+  font-size: 55px;
+  font-weight: bold;
+}
+
+
+/* Hero Section */
+.about-hero {
+  background-image: linear-gradient(rgba(176, 48, 96, 0.65), rgba(176, 48, 96, 0.65)),
+    url("../assets/Hero/about.jpg");
+  background-size: cover;
+  background-position: center;
+  min-height: 40vh;
+}
+
+.about-title {
+  color: #fff;
+  font-weight: 700;
+  font-size: 2.8rem;
+  letter-spacing: 1px;
+}
+
+/* Brand Story */
+.about-heading {
+  color: #b03060;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+}
+
+.about-text {
+  line-height: 1.8;
+  color: #444;
+}
+
+.about-text .highlight {
+  color: #b03060;
+  font-weight: 600;
+}
+
+.about-text .bold {
+  font-weight: 600;
+}
+
+.about-subtitle {
+  margin-top: 2rem;
+  color: #b03060;
+  font-weight: 700;
+  font-style: italic;
+}
+
+
+.no-data-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40vh;
+}
+
+.no-data-card {
+  text-align: center;
+  background-color: #ffe6f0; /* light rose background */
+  padding: 3rem 2rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(176, 48, 96, 0.2);
+  animation: popIn 0.5s ease;
+}
+
+.no-data-icon {
+  font-size: 3rem;
+  color: #b03060;
+  margin-bottom: 1rem;
+  animation: bounce 1s infinite;
+}
+
+.no-data-title {
+  font-size: 1.8rem;
+  color: #b03060;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.no-data-text {
+  color: #444;
+  font-size: 1rem;
+}
+
+/* Animations */
+@keyframes popIn {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.notfound-container {
+  min-height: 80vh;
+  text-align: center;
+  padding: 2rem;
+}
+
+.notfound-code {
+  font-size: 8rem;
+  font-weight: 900;
+  color: #b03060;
+  animation: popIn 0.5s ease;
+}
+
+.notfound-title {
+  font-size: 2rem;
+  color: #b03060;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.notfound-text {
+  font-size: 1rem;
+  color: #444;
+  max-width: 500px;
+}
+
+.btn-rose {
+  background-color: #b03060;
+  color: #fff;
+  border: none;
+  transition: 0.3s;
+}
+
+.btn-rose:hover {
+  background-color: #92274f;
+  color: #fff;
+}
+
+/* Pop-in animation */
+@keyframes popIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  text-align: center;
+  gap: 1rem;
+}
+
+.spinner-message {
+  font-size: 1.2rem;
+  color: #b03060; /* Veloura primary color */
+  font-weight: 600;
+}
+
+.spinner-veloura {
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.4rem;
+  border-top-color: #b03060;
+  border-right-color: #ffc0cb; /* light rose shade */
+  border-bottom-color: #b03060;
+  border-left-color: #ffc0cb;
+  animation: spin 1s linear infinite;
+}
+
+/* spin animation override for Bootstrap spinner */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.hero{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 @media (min-width: 992px) {
 body {
   font-size: 14px;
@@ -158,4 +369,7 @@ body {
   .cart-text {
     font-size: 26px;
   }
+.hero{
+  height: 100vh;
+}
 }

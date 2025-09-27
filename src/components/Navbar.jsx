@@ -4,12 +4,13 @@ import logo02 from "../assets/logos/1.png";
 
 const Navbar = ({ onSearch }) => {
   return (
-    <nav className="navbar navbar-expand-lg bg-rose navbar-dark">
+    <nav className="navbar navbar-expand-lg bg-rose navbar-dark sticky-top">
       <div className="container">
         {/* Logo */}
         <NavLink to="/" className="navbar-brand d-flex align-items-center">
           <img src={logo02} className="logo" alt="Logo" />
         </NavLink>
+
         <form>
           <input
             type="text"
@@ -46,13 +47,18 @@ const Navbar = ({ onSearch }) => {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/shoes" className="nav-link">
+              <NavLink to="/nueva-categoria" className="nav-link">
                 Earrings
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink to="/furniture" className="nav-link">
                 Bracelets & Anklets
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/about" className="nav-link">
+                About Us
               </NavLink>
             </li>
 

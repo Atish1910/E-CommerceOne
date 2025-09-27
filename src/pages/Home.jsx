@@ -1,77 +1,71 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import Spinner from '../components/Spinner';
-import Product from '../components/Product';
-import Navbar from '../components/Navbar';
+import React from "react";
+import { useOutletContext } from "react-router-dom";
+import Spinner from "../components/Spinner";
+import Product from "../components/Product";
+import HeroImg from "../assets/Hero/1.png";
+// import clothes from "../assets/Hero/clothes.jpg";
+import aboutBg from "../assets/Hero/about.jpg";
 
-  const API_URL = "https://api.escuelajs.co/api/v1/products";
-const Home = ({category,logo01}) => {
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [searchTerm, setSearchTerm] = useState("");
-    const [debounceSearch, setDebounceSearch] = useState("")
+const Home = ({ category }) => {
+  // receive data from App via Outlet context
+  const { products, loading, debounceSearch } = useOutletContext();
 
-    async function fetchProducts() {
-        setLoading(true)
-        try {
-            const res = await axios.get(API_URL);
-            setProducts(res.data);
-        } catch (error) {
-            setProducts([]);
-            console.log("Error To Fetch Api", error);
-        }
-        setLoading(false)
-    }
+  // 🔹 Apply filters
+  const filterData = products.filter((product) => {
+    const matchCategory = category
+      ? product.category.slug === category
+      : true;
+    const matchSearch = debounceSearch
+      ? product.title.toLowerCase().includes(debounceSearch.toLowerCase())
+      : true;
+    return matchCategory && matchSearch;
+  });
 
-    useEffect(() => {
-        fetchProducts();
-    }, []);
+  return (
+    <>
+      {/* Hero / Breadcrumb Section */}
+      {category ? (
+        <section
+         className="container-fluid breadcrumb-section d-flex align-items-center justify-content-center"
+                  style={{
+                    backgroundImage: `linear-gradient(rgba(176,48,96,0.65), rgba(176,48,96,0.65)), url(${aboutBg})`,
+                  }}
+        >
+          <h2 className="text-center fw-bold text-white display-5 text-uppercase ">
+            {category}
+          </h2>
+        </section>
 
-    useEffect(() => {
-        const handler = setTimeout(() => {
-            setDebounceSearch(searchTerm);
-        }, 500);
-    
-        return () => {
-            clearTimeout(handler)
-        }
-    }, [searchTerm])
+      ) : (
+        <section><img src={HeroImg} className="hero" alt="" /></section>
+      )}
 
-    function onSearch(e){
-        setSearchTerm(e.target.value)
-    }
-
-    const filterData = products.filter((product) =>{
-        const matchCategory = category ? product.category.slug == category : true
-        const matchSearch = debounceSearch ?  product.title.toLowerCase().includes(debounceSearch.toLowerCase()) : true;
-        return matchCategory && matchSearch;
-    })
-
-
-return (
-<>  
-    <Navbar logo01={logo01} onSearch={onSearch}></Navbar>
-    <section>
-        {
-            loading ? (<Spinner></Spinner>) :
-            filterData.length > 0 ?
-            (
-                <div className="container">
-                    <div className="row pt-3">
-                        {
-                            filterData.map((product) => (
-                                    <Product product={product} key={product.id}></Product>
-                            ))
-                        }
-                    </div>
-                </div>
-            ) : (
-                <p>No Data Found</p>
-            )
-        }
-    </section>
-</>
-);
+      {/* Products Section */}
+      <section className="border">
+        {loading ? (
+          <Spinner />
+        ) : filterData.length > 0 ? (
+          <div className="container">
+            <div className="row pt-3">
+              {filterData.map((product) => (
+                <Product product={product} key={product.id} />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className="no-data-container">
+            <div className="no-data-card">
+              <i className="bi bi-emoji-frown-fill no-data-icon"></i>
+              <h3 className="no-data-title">Oops!</h3>
+              <p className="no-data-text">
+                No products found matching your search or category.
+              </p>
+            </div>
+          </div>
+        )}
+      </section>
+    </>
+  );
 };
 
 export default Home;
