@@ -85,8 +85,9 @@ body {
   color: #fff !important;
 }
 .btn-blue:hover {
-  background-color: #2a5e7a;
-  color: #fff;
+  background-color: white !important;
+  border: solid 1px var(--blue) !important;
+  color: var(--blue) !important;
 }
 
 /* ===========================

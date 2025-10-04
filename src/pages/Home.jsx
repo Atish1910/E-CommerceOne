@@ -1,46 +1,33 @@
-import React from "react";
-import { useOutletContext } from "react-router-dom";
+import { useContext, useState, useMemo } from "react";
 import Spinner from "../components/Spinner";
 import Product from "../components/Product";
-import HeroImg from "../assets/Hero/1.png";
-// import clothes from "../assets/Hero/clothes.jpg";
-import aboutBg from "../assets/Hero/about.jpg";
+import NoFound from "../components/NoFound";
+import HeroCategory from "../components/HeroCategory";
+import Hero from "../components/Hero";
+import { Storege } from "../store/Context-api";
+import ProductModal from "../components/ProductModal";
 
 const Home = ({ category }) => {
-  // receive data from App via Outlet context
-  const { products, loading, debounceSearch } = useOutletContext();
+  const { products, loading, debounceSearch } = useContext(Storege);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
-  // 🔹 Apply filters
-  const filterData = products.filter((product) => {
-    const matchCategory = category
-      ? product.category.slug === category
-      : true;
-    const matchSearch = debounceSearch
-      ? product.title.toLowerCase().includes(debounceSearch.toLowerCase())
-      : true;
-    return matchCategory && matchSearch;
-  });
+  // ✅ Memoized filter logic
+  const filterData = useMemo(() => {
+    return products.filter((product) => {
+      const matchCategory = category
+        ? product.category?.slug?.toLowerCase() === category.toLowerCase()
+        : true;
+      const matchSearch = debounceSearch
+        ? product.title.toLowerCase().includes(debounceSearch.toLowerCase())
+        : true;
+      return matchCategory && matchSearch;
+    });
+  }, [products, category, debounceSearch]);
 
   return (
     <>
-      {/* Hero / Breadcrumb Section */}
-      {category ? (
-        <section
-         className="container-fluid breadcrumb-section d-flex align-items-center justify-content-center"
-                  style={{
-                    backgroundImage: `linear-gradient(rgba(176,48,96,0.65), rgba(176,48,96,0.65)), url(${aboutBg})`,
-                  }}
-        >
-          <h2 className="text-center fw-bold text-white display-5 text-uppercase ">
-            {category}
-          </h2>
-        </section>
+      {category ? <HeroCategory category={category} /> : <Hero />}
 
-      ) : (
-        <section><img src={HeroImg} className="hero" alt="" /></section>
-      )}
-
-      {/* Products Section */}
       <section className="border">
         {loading ? (
           <Spinner />
@@ -48,22 +35,21 @@ const Home = ({ category }) => {
           <div className="container">
             <div className="row pt-3">
               {filterData.map((product) => (
-                <Product product={product} key={product.id} />
+                <Product
+                  key={product.id}
+                  product={product}
+                  onOpen={() => setSelectedProduct(product)}
+                />
               ))}
             </div>
           </div>
         ) : (
-          <div className="no-data-container">
-            <div className="no-data-card">
-              <i className="bi bi-emoji-frown-fill no-data-icon"></i>
-              <h3 className="no-data-title">Oops!</h3>
-              <p className="no-data-text">
-                No products found matching your search or category.
-              </p>
-            </div>
-          </div>
+          <NoFound />
         )}
       </section>
+
+      {/* 🔹 Bootstrap modal */}
+      <ProductModal selectedProduct={selectedProduct} />
     </>
   );
 };

@@ -1,8 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import logo02 from "../assets/logos/1.png";
+import { useContext } from "react";
+import { Storege } from "../store/Context-api";
 
-const Navbar = ({ onSearch }) => {
+const Navbar = () => {
+  const {onSearch} = useContext(Storege)
   return (
     <nav className="navbar navbar-expand-lg bg-rose navbar-dark sticky-top">
       <div className="container">

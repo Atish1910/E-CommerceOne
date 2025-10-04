@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import axios from "axios";
-
-const API_URL = "https://api.escuelajs.co/api/v1/products";
+import { Storege } from "./store/Context-api";
+import HeroImg from "./assets/Hero/1.png";
+import aboutBg from "./assets/Hero/about.jpg";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -12,15 +13,17 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [debounceSearch, setDebounceSearch] = useState("");
 
-  // 🔹 Fetch data once
+  const API_URL = "https://api.escuelajs.co/api/v1/products";
+
+  // 🔹 Fetch products
   async function fetchProducts() {
     setLoading(true);
     try {
       const res = await axios.get(API_URL);
       setProducts(res.data);
     } catch (error) {
+      console.error("Error fetching products", error);
       setProducts([]);
-      console.error("Error fetching API", error);
     }
     setLoading(false);
   }
@@ -31,25 +34,30 @@ function App() {
 
   // 🔹 Debounce search
   useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebounceSearch(searchTerm);
-    }, 500);
-
+    const handler = setTimeout(() => setDebounceSearch(searchTerm), 500);
     return () => clearTimeout(handler);
   }, [searchTerm]);
 
-  // 🔹 Search handler
   function onSearch(e) {
     setSearchTerm(e.target.value);
   }
 
   return (
-    <>
-      <Navbar onSearch={onSearch} />
-      {/* Pass data/state down to children */}
-      <Outlet context={{ products, loading, debounceSearch}}></Outlet>
-      <Footer></Footer>
-    </>
+    <Storege.Provider
+      value={{
+        products,
+        loading,
+        onSearch,
+        searchTerm,
+        debounceSearch,
+        HeroImg,
+        aboutBg,
+      }}
+    >
+      <Navbar />
+      <Outlet />
+      <Footer />
+    </Storege.Provider>
   );
 }
 
